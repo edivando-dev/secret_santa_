@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Grupo</title>
+</head>
+<body>
+     
+     {% block content %}  
+     <h2>Criar um Novo Grupo de Amigo Secreto</h2>
+     <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Salvar Grupo</button>
+     </form>
+     {% endblock content %}
+</body>
+</html>
