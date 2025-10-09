@@ -1,11 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Inicial</title>
+    <style>
+        .messages {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+.messages li {
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+.messages li.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.messages li.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+    </style>
 </head>
 <body>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages  %}
+                <li {% if message.tags %} class="{{ message.tags }}"
+                {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     
 <h1>Bem-vindo à Página Inicial!</h1>
 
@@ -16,5 +47,15 @@
     <p>Você não está logado.</p>
     <p><a href="{% url 'login' %}">Entrar</a></p>
 {% endif %}
+<p><a href="{% url 'criar_grupo' %}">Criar um novo grupo</a></p>
+
+<h3>Seus Grupos:</h3>
+<ul>
+    {% for grupo in grupos %}
+    <li><a href="{% url 'grupo_detail' pk=grupo.pk %}">{{ grupo.nome }}</a></li>
+    {% empty %}
+    <li>Você não faz parte de nenhum grupo ainda.</li> 
+    {% endfor %}
+</ul>
 </body>
 </html>

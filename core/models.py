@@ -10,11 +10,9 @@ class Grupo(models.Model):
 
 #
 class Participante(models.Model):
-    
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    
     grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE, related_name='participantes')
+    amigo_secreto = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='tirado_por')
 
     def __str__(self):
         return f"{self.usuario.username} no grupo '{self.grupo.nome}'"

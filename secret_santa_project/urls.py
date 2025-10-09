@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from core import views as core_views
-from core.views import GrupoCreateView
+from core.views import home, GrupoCreateView, GrupoDetailView, realizar_sorteio
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', core_views.home, name='home'),
     path('grupo/novo/', GrupoCreateView.as_view(), name='criar_grupo'),
+    path('grupo/<int:pk>/sortear', core_views.realizar_sorteio, name='relizar_sorteio'),
+    path('grupo/<int:pk>/', GrupoDetailView.as_view(), name='grupo_detail'),
     ]
